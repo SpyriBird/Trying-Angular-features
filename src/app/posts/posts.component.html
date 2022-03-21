@@ -1,0 +1,59 @@
+<div class="form-container">
+    <form [formGroup]="form" (submit)="addPost()" class="create-post-form">
+        <h1>
+            Создайте свой пост
+        </h1>
+        <ul>
+            <li>
+                <mat-form-field appearance="fill" class="form-element">
+                    <mat-label>Заголовок поста</mat-label>
+                    <input matInput type="text" formControlName="title">
+                </mat-form-field>
+            </li>
+            <li>
+                <mat-form-field appearance="fill" class="form-element">
+                    <mat-label>Содержание поста</mat-label>
+                    <textarea matInput formControlName="body" rows="8" cols="40"></textarea>
+                </mat-form-field>
+            </li>
+            <li>
+                <button mat-raised-button type="submit" color="accent" [disabled]="form.invalid">Создать пост</button>
+            </li>
+        </ul>
+
+    </form>
+
+    <ng-template #noPosts>
+        <p class="no-posts-paragraph"> Постов нету(</p>
+    </ng-template>
+    <div *ngIf="!loading; else load">
+        <div class="pages">
+            Страница {{this.currentPosition / this.postsPerPage + 1}} из {{pages.length}}
+        </div>
+
+        <div *ngIf="posts.length; else noPosts" class="wrapper">
+            <app-post *ngFor="let p of visiblePosts; let idx = index" [post]="p" [error]="error" (onChange)="onChange($event)">
+                <div class="mdc-touch-target-wrapper">
+                    <button mat-raised-button type="button" (click)="removePost(p.id)" color="primary">Удалить пост
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+                </button>
+                </div>
+            </app-post>
+        </div>
+
+        <form class="nav" *ngIf="visiblePages.length > 1">
+            <button mat-raised-button type="button" (click)="onPrevPosts()" [disabled]="currentPosition === 0">&#60;</button>
+            <div *ngFor="let i of visiblePages; let idx = index">
+                <a [routerLink]="['/posts', i]" routerLinkActive="active-link">
+                    <div class="page-num">{{i}}</div>
+                </a>
+                <span *ngIf="visiblePages[idx] + 1 !== visiblePages[idx + 1] && idx !== visiblePages.length - 1">...</span>
+            </div>
+            <button mat-raised-button type="button" (click)="onNextPosts()" [disabled]="currentPosition >= numberOfPosts - postsPerPage">&#62;</button>
+        </form>
+    </div>
+</div>
+
+<ng-template #load>
+    <mat-spinner></mat-spinner>
+</ng-template>

@@ -1,0 +1,88 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.create-post-form {
+    width: 30%;
+    min-width: 400px;
+}
+
+.form-element {
+    width: 100%;
+}
+
+app-post {
+    width: 40%;
+    height: auto;
+    align-self: stretch;
+}
+
+@media screen and (max-width: 1000px) {
+    app-post {
+        width: 100%;
+    }
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 1rem;
+}
+
+.page-num {
+    $size: 30px;
+    text-decoration: none;
+    display: inline-block;
+    margin: .2rem;
+    height: $size;
+    width: $size;
+    color: black;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: $size;
+    cursor: pointer;
+}
+
+a.active-link .page-num {
+    background-color: peachpuff;
+}
+
+.nav {
+    margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+@media screen and (max-width: 700px) {
+    .page-num {
+        height: 20px;
+        width: 20px;
+        line-height: 20px;
+        font-size: .8rem;
+    }
+}
+
+.no-posts-paragraph {
+    margin: auto;
+    text-align: center;
+}
+
+.pages {
+    text-align: center;
+}

@@ -1,0 +1,23 @@
+.outer {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+form {
+    max-width: 500px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: .5rem 0;
+}
+
+mat-form-field {
+    width: 100%;
+    min-width: 300px;
+}

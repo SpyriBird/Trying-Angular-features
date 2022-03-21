@@ -1,0 +1,85 @@
+<div class="outer">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <h1> Заполните форму регистрации</h1>
+        <ul>
+            <li>
+                <mat-form-field appearance="fill">
+                    <mat-label>Имя</mat-label>
+                    <input matInput type="text" formControlName="name" color="primary">
+                </mat-form-field>
+                <div *ngIf="form.get('name').invalid && form.get('name').touched">
+                    <mat-error *ngIf="form.get('name').errors?.['required']">Имя не введено</mat-error>
+                    <mat-error *ngIf="form.get('name').errors?.['minlength']">Имя не может быть короче {{form.get('name').errors?.['minlength'].requiredLength}} символов</mat-error>
+                    <mat-error *ngIf="form.get('name').errors?.['maxlength']">Имя не может быть длиннее {{form.get('name').errors?.['maxlength'].requiredLength}} символов</mat-error>
+                    <mat-error *ngIf="form.get('name').errors?.['pattern']">Имя введено некорректно. Имя должно начинаться с заглавной буквы, и не должно содержать никаких символов, кроме букв кириллицы и "-".</mat-error>
+                </div>
+            </li>
+            <li>
+                <mat-form-field appearance="fill">
+                    <mat-label>Фамилию</mat-label>
+                    <input matInput type="text" formControlName="surname" color="primary">
+                </mat-form-field>
+                <div *ngIf="form.get('surname').invalid && form.get('surname').touched">
+                    <mat-error *ngIf="form.get('surname').errors?.['required']">Фамилия не введена</mat-error>
+                    <mat-error *ngIf="form.get('surname').errors?.['minlength']">Фамилия не может быть короче {{form.get('surname').errors?.['minlength'].requiredLength}} символов</mat-error>
+                    <mat-error *ngIf="form.get('surname').errors?.['maxlength']">Фамилия не может быть длиннее {{form.get('surname').errors?.['maxlength'].requiredLength}} символов</mat-error>
+                    <mat-error *ngIf="form.get('surname').errors?.['pattern']">Фамилия введена некорректно. Фамилия должна начинаться с заглавной буквы, и не должна содержать никаких символов, кроме букв кириллицы и "-".</mat-error>
+                </div>
+            </li>
+            <li>
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" formControlName="email" color="primary" />
+                </mat-form-field>
+                <div *ngIf="form.get('email').invalid && form.get('email').touched">
+                    <mat-error *ngIf="form.get('email').errors?.['required']">Email не введен</mat-error>
+                    <mat-error *ngIf="form.get('email').errors?.['email']">Введен некорректный email.</mat-error>
+                </div>
+            </li>
+            <li>
+                <mat-form-field appearance="fill">
+                    <mat-label>Придумайте пароль</mat-label>
+                    <input matInput #pass type="password" formControlName="password" color="primary">
+                </mat-form-field>
+                <div *ngIf="form.get('password').invalid && form.get('password').touched">
+                    <mat-error *ngIf="form.get('password').errors?.['required']">Пароль не введен</mat-error>
+                    <mat-error *ngIf="form.get('password').errors?.['pattern']?.requiredPattern === '/\\d/'">Вашему паролю не хватает цифры</mat-error>
+                    <mat-error *ngIf="form.get('password').errors?.['pattern']?.requiredPattern === '/[A-ZА-Я]/'">Вашему паролю не хватает заглавной буквы</mat-error>
+                    <mat-error *ngIf="form.get('password').errors?.['pattern']?.requiredPattern === '/[а-яf-z]/'">Вашему паролю не хватает строчной буквы</mat-error>
+                    <mat-error *ngIf="form.get('password').errors?.['pattern']?.requiredPattern === '/[-`~@#\\$%\\^&\\*()_+={}\\[\\]><?!//\\\\.\\,\\|;:]/'">Вашему паролю не хватает символа. Добавьте один из символов "`~!@#$%^&*()_+=-\|?.,&lt;&gt;&#123;&#125;[]:;" </mat-error>
+                    <mat-error *ngIf="form.get('password').errors?.['minlength']">Пароль должен состоять из {{form.get('password').errors?.['minlength'].requiredLength}} и более символов</mat-error>
+                </div>
+            </li>
+            <li>
+                <mat-form-field appearance="fill">
+                    <mat-label>Повторите пароль</mat-label>
+                    <input matInput type="password" formControlName="passwordConfirm" color="primary">
+                </mat-form-field>
+
+                <div *ngIf="form.get('passwordConfirm').invalid && form.get('passwordConfirm').touched">
+                    <mat-error *ngIf="form.get('passwordConfirm').errors?.['required']">Пароль не введен</mat-error>
+                    <mat-error *ngIf="form.get('passwordConfirm').errors">Пароли не совпадают</mat-error>
+                </div>
+            </li>
+            <li>
+                <mat-form-field appearance="fill">
+                    <mat-label>Датa рождения</mat-label>
+                    <input type="text" formControlName="birthday" color="primary" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                </mat-form-field>
+                <div *ngIf="form.get('birthday').invalid && form.get('birthday').touched">
+                    <mat-error *ngIf="form.get('birthday').errors?.['required']">Дата не введена</mat-error>
+                    <mat-error *ngIf="form.get( 'birthday').errors?.['notAdult']">Для регистрации нужно быть старше 18 лет.</mat-error>
+                </div>
+            </li>
+            <li *ngIf="error">
+                Не удалось создать аккаунт
+            </li>
+            <li>
+                <button mat-raised-button type="submit" color="primary" [disabled]="form.invalid">Отправить</button>
+            </li>
+        </ul>
+    </form>
+</div>

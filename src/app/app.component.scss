@@ -1,0 +1,14 @@
+mat-card {
+    text-align: right;
+    background-color: rgb(63, 81, 181);
+    padding: 1rem 10%;
+    a {
+        font-size: 2rem;
+        text-decoration: none;
+        color: white;
+        margin: 0 .7rem;
+        &.active {
+            color: black;
+        }
+    }
+}

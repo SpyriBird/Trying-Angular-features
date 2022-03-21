@@ -1,0 +1,50 @@
+<div [ngSwitch]="postState" class="outer">
+    <mat-card class="card">
+        <div *ngSwitchCase="0" class="card-content-wrapper">
+            <div class="card-content">
+                <mat-card-title>{{post.title}}</mat-card-title>
+                <mat-card-content>{{post.body}}</mat-card-content>
+
+            </div>
+            <mat-card-actions class="card-form">
+                <form>
+                    <ng-content></ng-content>
+                    <button type="button" (click)="editPost()" mat-raised-button color="primary">Редактировать пост
+                        <mat-icon aria-hidden="false" >create</mat-icon>
+                    </button>
+                </form>
+                <p *ngIf="error">
+                    {{error}}
+                </p>
+            </mat-card-actions>
+        </div>
+
+        <div *ngSwitchCase="1">
+            <form [formGroup]="form" (submit)="saveChanges()">
+                <ul>
+                    <li>
+                        <mat-form-field appearance="fill" class="form-element">
+                            <mat-label>Заголовок поста</mat-label>
+                            <input matInput type="text" (blur)="onBlur($event)" formControlName="title" #inputTitle />
+                        </mat-form-field>
+                    </li>
+                    <li>
+                        <mat-form-field appearance="fill" class="form-element">
+                            <mat-label>Содержание поста</mat-label>
+                            <textarea matInput (blur)="onBlur($event)" #inputBody formControlName="body" rows="4"></textarea>
+                        </mat-form-field>
+                    </li>
+                    <li>
+                        <button mat-raised-button color="accent" type="submit" #submitButton>OK
+                            <mat-icon aria-hidden="false" aria-label="Example home icon">done</mat-icon>
+                        </button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+        <div *ngSwitchCase="2" class="spinner">
+            <mat-spinner></mat-spinner>
+        </div>
+    </mat-card>
+</div>

@@ -1,0 +1,34 @@
+table {
+    width: 100%;
+    min-width: 600px;
+}
+
+.button {
+    margin: .5rem;
+    display: inline-block;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+    padding: 0 .5rem;
+    text-align: center;
+}
+
+td.mat-cell:not(:last-of-type) {
+    max-width: 100px;
+}
+
+mat-form-field {
+    max-width: 90px;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+    width: 48px;
+}
+
+.outer {
+    overflow-x: scroll;
+}

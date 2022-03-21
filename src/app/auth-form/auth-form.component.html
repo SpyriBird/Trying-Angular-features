@@ -1,0 +1,33 @@
+<div class="outer">
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <h1>
+            Вход
+        </h1>
+        <ul>
+            <li>
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email">
+                </mat-form-field>
+                <div *ngIf="form.get('email').invalid && form.get('email').touched">
+                    <mat-error *ngIf="form.get('email').errors?.['required']">Email не введен</mat-error>
+                    <mat-error *ngIf="form.get('email').errors?.['email']">Введен некорректный email.</mat-error>
+                </div>
+            </li>
+            <li>
+                <mat-form-field appearance="fill">
+                    <mat-label>Пароль</mat-label>
+                    <input matInput type="password" formControlName="pass">
+                </mat-form-field>
+                <div *ngIf="form.get('pass').invalid && form.get('pass').touched">
+                    <mat-error *ngIf="form.get('pass').errors?.['required']">Пароль не введен</mat-error>
+                </div>
+            </li>
+            <li>
+                <div class="mdc-touch-target-wrapper">
+                    <button mat-raised-button type="submit" color="primary" [disabled]="form.invalid">Войти</button>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
